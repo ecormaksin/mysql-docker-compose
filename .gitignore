@@ -1,0 +1,6 @@
+mysql/init/*
+mysql/work/*
+!mysql/init/.gitkeep
+!mysql/work/.gitkeep
+.env
+compose.yaml
