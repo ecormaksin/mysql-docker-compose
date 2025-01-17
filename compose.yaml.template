@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: "mysql-ja:<tag>"
+    image: mysql-ja:${CUSTOM_MYSQL_DOCKER_IMAGE_TAG}
     ports:
       - 3306:3306
     environment:
