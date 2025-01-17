@@ -2,7 +2,7 @@ services:
   mysql:
     image: mysql-ja:${CUSTOM_MYSQL_DOCKER_IMAGE_TAG}
     ports:
-      - 3306:3306
+      - ${CUSTOM_MYSQL_HOST_PORT}:3306
     environment:
       - MYSQL_ROOT_PASSWORD=secret
       - TZ=Asia/Tokyo
@@ -10,7 +10,7 @@ services:
     volumes:
       - mysql-data:/var/lib/mysql
       - mysql-conf:/etc/mysql/conf.d
-      - ./mysql/docker-entrypoint-initdb.d:/docker-entrypoint-initdb.d
+      - ./mysql/init:/docker-entrypoint-initdb.d
       - ./mysql/work:/work
 volumes:
   mysql-data:
