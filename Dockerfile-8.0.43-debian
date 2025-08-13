@@ -1,0 +1,16 @@
+FROM docker.io/library/mysql:8.0.43-debian
+
+RUN echo 'Acquire { https::Verify-Peer false }' > /etc/apt/apt.conf.d/99verify-peer.conf && \
+    mv /etc/apt/sources.list.d/mysql.list /etc/apt/sources.list.d/mysql.list.disabled && \
+    apt-get -y update && apt-get install -y curl && apt-get clean && \
+    mkdir -p /etc/apt/keyrings && \
+    curl -sSfL http://repo.mysql.com/RPM-GPG-KEY-mysql-2023 | gpg --import && \
+    gpg --batch --export "B7B3B788A8D3785C" > /etc/apt/keyrings/mysql.gpg && \
+    mv /etc/apt/sources.list.d/mysql.list.disabled /etc/apt/sources.list.d/mysql.list && \
+    apt-get -y update && \
+    apt-get install -y locales && \
+    rm -rf /var/lib/apt/lists/* && \
+    echo "ja_JP.UTF-8 UTF-8" > /etc/locale.gen && \
+    locale-gen ja_JP.UTF-8
+
+ENV LC_ALL=ja_JP.UTF-8
